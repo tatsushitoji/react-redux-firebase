@@ -4,15 +4,13 @@ import { compose } from 'recompose';
 import { RootState } from '../../stores/store';
 import { RootActions } from '../../stores/actions';
 import { addTodo, toggleTodo } from '../../modules/todo';
-import { head } from '../../components/hocs/head';
+import { head } from '../../hocs/head';
 import { TodoComponent, Props } from '../../components/pages/Todo';
 import { firestoreConnect } from 'react-redux-firebase';
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    todos: state.firestore.ordered.todos,
-  };
-};
+const mapStateToProps = (state: RootState) => ({
+  todos: state.firestore.ordered.todos,
+});
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<RootState, undefined, RootActions>,

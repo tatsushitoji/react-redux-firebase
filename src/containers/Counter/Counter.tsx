@@ -7,7 +7,7 @@ import {
   decrementAmount,
   asyncIncrementAmount,
 } from '../../modules/counter';
-import { head } from '../../components/hocs/head';
+import { head } from '../../hocs/head';
 import {
   Counter as CounterComponent,
   Props,

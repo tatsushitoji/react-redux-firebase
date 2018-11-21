@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { compose } from 'recompose';
-import { drawerState, EnhancedProps } from '../hocs/drawerState';
+import { drawerState, EnhancedProps } from '../../hocs/drawerState';
 import 'typeface-roboto';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
