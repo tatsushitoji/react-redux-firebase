@@ -8,6 +8,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const {
   NODE_ENV,
+  PUBLIC_PATH,
 } = process.env;
 
 const devMode = NODE_ENV !== 'production';
@@ -18,12 +19,13 @@ const base = {
   entry: "./src/index.tsx",
 
   output: {
-    filename: '[name].[contenthash].bundle.js',
-    chunkFilename: '[name].[contenthash].[id].bundle.js'
+    filename: '[name].[hash].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: PUBLIC_PATH || '/',
   },
 
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"]
+    extensions: [".ts", ".tsx", ".js", ".json"],
   },
 
   module: {
@@ -42,7 +44,7 @@ const base = {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
-            outputPath: 'fonts/'
+            outputPath: 'fonts',
           }
         }]
       }
@@ -53,7 +55,7 @@ const base = {
     new Dotenv(),
     new HtmlWebpackPlugin({
       inject: true,
-      template: 'src/index.html'
+      template: 'src/index.html',
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
@@ -90,7 +92,7 @@ const development = merge(base, {
 
 const production = merge(base, {
   plugins: [
-    new BundleAnalyzerPlugin({ analyzerMode: 'static' })
+    new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
   ],
   optimization: {
     minimizer: [

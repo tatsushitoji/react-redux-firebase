@@ -2,8 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { renderRoutes } from 'react-router-config';
-import { routeConfig } from './routes';
+import { Router } from './routes';
 import { configureStore, history } from './stores/store';
 
 // if (process.env.NODE_ENV !== 'production') {
@@ -13,16 +12,16 @@ import { configureStore, history } from './stores/store';
 
 const store = configureStore({});
 
-const renderApp = () =>
+const renderApp = (RouterComponent: typeof Router) =>
   ReactDOM.render(
     <React.Fragment>
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          {renderRoutes(routeConfig)}
+          <RouterComponent />
         </ConnectedRouter>
       </Provider>
     </React.Fragment>,
     document.body && document.body.appendChild(document.createElement('div')),
   );
 
-renderApp();
+renderApp(Router);

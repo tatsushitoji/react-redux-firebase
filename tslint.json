@@ -16,6 +16,7 @@
       "always",
       "ignore-bound-class-methods"
     ],
-    "import-name": false
+    "import-name": false,
+    "jsx-boolean-value": false
   }
 }

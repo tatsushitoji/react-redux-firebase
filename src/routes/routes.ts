@@ -1,41 +1,19 @@
-import { RouteConfig } from 'react-router-config';
 import loadable from 'loadable-components';
-import { App } from '../components/App';
 
-const LoadableCounter = loadable(
-  () =>
-    import(/* webpackChunkName: "Counter" */ '../containers/Counter').then(
-      ({ Counter }) => Counter,
-    ),
-  {
-    modules: ['../containers/Counter'],
-  },
+export const LoadableHome = loadable(() =>
+  import(/* webpackChunkName: "Home" */ '../components/pages/Home').then(
+    ({ Home }) => Home,
+  ),
 );
 
-const LoadableTodo = loadable(
-  () =>
-    import(/* webpackChunkName: "Todo" */ '../containers/Todo').then(
-      ({ Todo }) => Todo,
-    ),
-  {
-    modules: ['../containers/Todo'],
-  },
+export const LoadableCounter = loadable(() =>
+  import(/* webpackChunkName: "Counter" */ '../containers/Counter').then(
+    ({ Counter }) => Counter,
+  ),
 );
 
-export const routeConfig = [
-  {
-    component: App,
-    routes: [
-      {
-        path: '/',
-        exact: true,
-        component: LoadableCounter,
-      },
-      {
-        path: '/todo',
-        exact: true,
-        component: LoadableTodo,
-      },
-    ],
-  },
-] as RouteConfig[];
+export const LoadableTodo = loadable(() =>
+  import(/* webpackChunkName: "Todo" */ '../containers/Todo').then(
+    ({ Todo }) => Todo,
+  ),
+);

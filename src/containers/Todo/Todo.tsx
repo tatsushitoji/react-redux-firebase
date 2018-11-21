@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 import { RootState } from '../../stores/store';
 import { RootActions } from '../../stores/actions';
 import { addTodo, toggleTodo } from '../../modules/todo';
+import { head } from '../../components/hocs/head';
 import { TodoComponent, Props } from '../../components/pages/Todo';
 import { firestoreConnect } from 'react-redux-firebase';
 
@@ -21,6 +22,7 @@ const mapDispatchToProps = (
 });
 
 export const Todo = compose<Props, { store?: unknown }>(
+  head('Todo'),
   firestoreConnect(['todos']),
   connect(
     mapStateToProps,

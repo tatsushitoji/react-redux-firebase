@@ -7,6 +7,7 @@ import {
   decrementAmount,
   asyncIncrementAmount,
 } from '../../modules/counter';
+import { head } from '../../components/hocs/head';
 import {
   Counter as CounterComponent,
   Props,
@@ -31,6 +32,7 @@ const mapDispatchToProps = (
 });
 
 export const Counter = compose<Props, { store?: unknown }>(
+  head('counter'),
   firestoreConnect(['counter']),
   connect(
     mapStateToProps,
