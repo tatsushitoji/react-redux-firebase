@@ -7,7 +7,7 @@ export const TOGGLE_TODO = 'todo/toggle_todo';
 export const addTodo: ActionCreator<FBAction<void>> = (text: string) => (
   _,
   __,
-  getFirestore,
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
   firestore.add('todos', { text, completed: false }).catch((err: Error) => {
@@ -18,7 +18,7 @@ export const addTodo: ActionCreator<FBAction<void>> = (text: string) => (
 export const toggleTodo: ActionCreator<FBAction<void>> = (id: string) => (
   _,
   getState,
-  getFirestore,
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
   const state = getState();
