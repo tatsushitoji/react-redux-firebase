@@ -94,7 +94,8 @@ const SideDrawer: React.SFC<Props> = ({
     <List component="nav">
       <ListItem
         // tslint:disable-next-line
-          component={({ innerRef, ...props }) => <NavLink {...props} to="/" />}
+          component={({ innerRef, ...props }) => (<NavLink {...props} to="/home" />
+        )}
       >
         <ListItemIcon>
           <HomeIcon />
