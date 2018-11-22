@@ -3,7 +3,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import reduxThunk, { ThunkMiddleware } from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import { routerMiddleware, RouterState } from 'connected-react-router';
-import { reactReduxFirebase } from 'react-redux-firebase';
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { firebase, rrfConfig } from '../firebase';
 import { rootReducer } from './reducers';
@@ -33,10 +33,10 @@ const createEnhancer = () => {
   return composeEnhancers(
     applyMiddleware(
       epicMiddleware,
-      reduxThunk.withExtraArgument(getFirestore) as ThunkMiddleware<
-        RootState,
-        RootActions
-      >,
+      reduxThunk.withExtraArgument({
+        getFirebase,
+        getFirestore,
+      }) as ThunkMiddleware<RootState, RootActions>,
       routerMiddleware(history),
     ),
     reduxFirestore(firebase),
