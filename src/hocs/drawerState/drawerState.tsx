@@ -9,11 +9,13 @@ export interface StateHandlers {
   setSideOpen: (_: React.SyntheticEvent) => void;
 }
 
-export type EnhancedProps = State & StateHandlers;
+export type Props = State & StateHandlers;
 
-export const drawerState = <Props extends EnhancedProps>() =>
-  compose<Props, Props>(
-    withStateHandlers<State, StateHandlerMap<State>, Props>(
+export const drawerState = <P extends Props>(
+  Component: React.ComponentClass<P> | React.SFC<P>,
+): React.ComponentClass<P> =>
+  compose<P, P>(
+    withStateHandlers<State, StateHandlerMap<State>, P>(
       { sideOpen: false },
       {
         setSideOpen: ({ sideOpen }) => () => ({
@@ -21,4 +23,4 @@ export const drawerState = <Props extends EnhancedProps>() =>
         }),
       },
     ),
-  );
+  )(Component);

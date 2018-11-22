@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { compose } from 'recompose';
-import { drawerState, EnhancedProps } from '../../hocs/drawerState';
+import { drawerState, Props as DraweStateProps } from '../../hocs/drawerState';
 import 'typeface-roboto';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -9,9 +9,7 @@ import { Main } from '../templates/Main';
 
 interface OuterProps {}
 
-type InnerProps = EnhancedProps;
-
-const AppComponent: React.SFC<EnhancedProps> = ({
+const AppComponent: React.SFC<DraweStateProps> = ({
   children,
   sideOpen,
   setSideOpen,
@@ -24,6 +22,6 @@ const AppComponent: React.SFC<EnhancedProps> = ({
   </MuiThemeProvider>
 );
 
-export const App = compose<InnerProps, OuterProps>(drawerState<InnerProps>())(
+export const App = compose<DraweStateProps, OuterProps>(drawerState)(
   AppComponent,
 );
