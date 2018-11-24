@@ -7,7 +7,7 @@ export const ASYNC_INCREMENT = 'counter/async_increment';
 
 export const incrementAmount: ActionCreator<FBAction<void>> = (
   amount: number,
-) => (_, getState, getFirestore) => {
+) => (_, getState, { getFirestore }) => {
   const firestore = getFirestore();
   const state = getState();
   const stateCount: number = state.firestore.data.counter.counter1.count;
@@ -20,7 +20,7 @@ export const incrementAmount: ActionCreator<FBAction<void>> = (
 
 export const decrementAmount: ActionCreator<FBAction<void>> = (
   amount: number,
-) => (_, getState, getFirestore) => {
+) => (_, getState, { getFirestore }) => {
   const firestore = getFirestore();
   const state = getState();
   const stateCount: number = state.firestore.data.counter.counter1.count;
