@@ -5,9 +5,11 @@ import { withStyles, createStyles, Theme, WithStyles } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { WIDTH_DRAWER } from '../theme';
+import { Auth } from '../../modules/auth';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -31,19 +33,28 @@ const styles = (theme: Theme) =>
       marginLeft: 12,
       marginRight: 36,
     },
+    title: {
+      flexGrow: 1,
+    },
   });
 
-interface Props extends WithStyles<typeof styles> {
+export type Props = {
   isOpen: boolean;
   toggleSideOpen: (_: React.SyntheticEvent) => void;
+};
+
+export interface State extends WithStyles<typeof styles> {
+  auth: Auth;
+  logout: () => void;
   theme?: Theme;
 }
-
-const HeaderComponent: React.SFC<Props> = ({
+const HeaderComponent: React.SFC<Props & State> = ({
+  auth,
+  logout,
   isOpen,
   toggleSideOpen,
   classes,
-}: Props) => (
+}) => (
   <AppBar
     position="fixed"
     className={classNames(classes.appBar, {
@@ -61,11 +72,24 @@ const HeaderComponent: React.SFC<Props> = ({
           <MenuIcon />
         </IconButton>
       )}
-      <Typography variant="h6" color="inherit" noWrap={true}>
+      <Typography
+        className={classes.title}
+        variant="h6"
+        color="inherit"
+        noWrap={true}
+      >
         Hello My App
       </Typography>
+      {auth.isLoaded &&
+        !auth.isEmpty && (
+          <Button color="inherit" onClick={logout}>
+            Logout
+          </Button>
+        )}
     </Toolbar>
   </AppBar>
 );
 
-export const Header = pure(withStyles(styles)(HeaderComponent));
+export const Header = pure(withStyles(styles)(HeaderComponent) as React.SFC<
+  Props & State
+>);

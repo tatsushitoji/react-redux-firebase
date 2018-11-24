@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { withStyles, createStyles, Theme, WithStyles } from '@material-ui/core';
-import { Header, SideNavi } from '../organisms';
+import { Header } from '../../containers/Header';
+import { SideNavi } from '../organisms';
 
 const styles = (theme: Theme) =>
   createStyles({
