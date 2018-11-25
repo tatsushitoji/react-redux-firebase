@@ -55,7 +55,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-export interface SideNaviProps extends WithStyles<typeof styles> {
+export interface SideNaviProps {
   isOpen: boolean;
   toggleSideOpen: (_: React.SyntheticEvent) => void;
 }
