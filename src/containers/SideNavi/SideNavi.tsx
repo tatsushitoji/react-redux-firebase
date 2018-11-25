@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../../stores/store';
 import {
   SideNavi as SideNaviComponent,
-  Props,
-  State,
+  SideNaviProps as Props,
+  SideNaviState as State,
 } from '../../components/organisms/SideNavi';
 import { withFirebase } from 'react-redux-firebase';
 

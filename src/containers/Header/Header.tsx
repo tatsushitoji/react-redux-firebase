@@ -4,8 +4,8 @@ import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../../stores/store';
 import {
   Header as HeaderComponent,
-  Props,
-  State,
+  HeaderProps as Props,
+  HeaderState as State,
 } from '../../components/organisms/Header';
 import { withFirebase } from 'react-redux-firebase';
 import { logOut } from '../../modules/auth';

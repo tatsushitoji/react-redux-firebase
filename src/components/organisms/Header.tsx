@@ -38,18 +38,18 @@ const styles = (theme: Theme) =>
     },
   });
 
-export type Props = {
+export type HeaderProps = {
   isOpen: boolean;
   toggleSideOpen: (_: React.SyntheticEvent) => void;
 };
 
-export interface State extends WithStyles<typeof styles> {
+export interface HeaderState extends WithStyles<typeof styles> {
   auth: Auth;
   logout: () => void;
   theme?: Theme;
 }
 
-const HeaderComponent: React.SFC<Props & State> = ({
+const HeaderComponent: React.SFC<HeaderProps & HeaderState> = ({
   auth,
   logout,
   isOpen,
@@ -92,5 +92,5 @@ const HeaderComponent: React.SFC<Props & State> = ({
 );
 
 export const Header = pure(withStyles(styles)(HeaderComponent) as React.SFC<
-  Props & State
+  HeaderProps & HeaderState
 >);

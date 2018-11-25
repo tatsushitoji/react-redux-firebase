@@ -55,16 +55,16 @@ const styles = (theme: Theme) =>
     },
   });
 
-export interface Props extends WithStyles<typeof styles> {
+export interface SideNaviProps extends WithStyles<typeof styles> {
   isOpen: boolean;
   toggleSideOpen: (_: React.SyntheticEvent) => void;
 }
 
-export interface State extends WithStyles<typeof styles> {
+export interface SideNaviState extends WithStyles<typeof styles> {
   auth: Auth;
   theme?: Theme;
 }
-const SideDrawer: React.SFC<Props & State> = ({
+const SideDrawer: React.SFC<SideNaviProps & SideNaviState> = ({
   auth,
   isOpen,
   toggleSideOpen,
@@ -136,5 +136,5 @@ const SideDrawer: React.SFC<Props & State> = ({
 );
 
 export const SideNavi = withStyles(styles)(SideDrawer) as React.SFC<
-  Props & State
+  SideNaviProps & SideNaviState
 >;
