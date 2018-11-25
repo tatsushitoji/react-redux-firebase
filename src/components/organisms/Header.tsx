@@ -48,6 +48,7 @@ export interface State extends WithStyles<typeof styles> {
   logout: () => void;
   theme?: Theme;
 }
+
 const HeaderComponent: React.SFC<Props & State> = ({
   auth,
   logout,
