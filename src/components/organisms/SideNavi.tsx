@@ -14,8 +14,8 @@ import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import IconButton from '@material-ui/core/IconButton';
-// import Tooltip from '@material-ui/core/Tooltip';
 import { WIDTH_DRAWER } from '../theme';
+import { Auth } from '../../modules/auth';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -55,13 +55,17 @@ const styles = (theme: Theme) =>
     },
   });
 
-interface Props extends WithStyles<typeof styles> {
+export interface Props extends WithStyles<typeof styles> {
   isOpen: boolean;
   toggleSideOpen: (_: React.SyntheticEvent) => void;
-  theme?: Theme;
 }
 
-const SideDrawer: React.SFC<Props> = ({
+export interface State extends WithStyles<typeof styles> {
+  auth: Auth;
+  theme?: Theme;
+}
+const SideDrawer: React.SFC<Props & State> = ({
+  auth,
   isOpen,
   toggleSideOpen,
   classes,
@@ -91,41 +95,46 @@ const SideDrawer: React.SFC<Props> = ({
       </IconButton>
     </div>
     <Divider />
-    <List component="nav">
-      <ListItem
-        // tslint:disable-next-line
+    {auth.isLoaded &&
+      !auth.isEmpty && (
+        <List component="nav">
+          <ListItem
+            // tslint:disable-next-line
           component={({ innerRef, ...props }) => (<NavLink {...props} to="/home" />
-        )}
-      >
-        <ListItemIcon>
-          <HomeIcon />
-        </ListItemIcon>
-        <ListItemText primary="HOME" />
-      </ListItem>
-      <ListItem
-        // tslint:disable-next-line
+            )}
+          >
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="HOME" />
+          </ListItem>
+          <ListItem
+            // tslint:disable-next-line
           component={({ innerRef, ...props }) => (
-          <NavLink {...props} to="/counter" />
-        )}
-      >
-        <ListItemIcon>
-          <ExposurePlus1Icon />
-        </ListItemIcon>
-        <ListItemText primary="COUNTER" />
-      </ListItem>
-      <ListItem
-        // tslint:disable-next-line
+              <NavLink {...props} to="/counter" />
+            )}
+          >
+            <ListItemIcon>
+              <ExposurePlus1Icon />
+            </ListItemIcon>
+            <ListItemText primary="COUNTER" />
+          </ListItem>
+          <ListItem
+            // tslint:disable-next-line
           component={({ innerRef, ...props }) => (
-          <NavLink {...props} to="/todo" />
-        )}
-      >
-        <ListItemIcon>
-          <DoneAllIcon />
-        </ListItemIcon>
-        <ListItemText primary="TODO" />
-      </ListItem>
-    </List>
+              <NavLink {...props} to="/todo" />
+            )}
+          >
+            <ListItemIcon>
+              <DoneAllIcon />
+            </ListItemIcon>
+            <ListItemText primary="TODO" />
+          </ListItem>
+        </List>
+      )}
   </Drawer>
 );
 
-export const SideNavi = withStyles(styles)(SideDrawer);
+export const SideNavi = withStyles(styles)(SideDrawer) as React.SFC<
+  Props & State
+>;
