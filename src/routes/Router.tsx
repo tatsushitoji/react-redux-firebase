@@ -5,6 +5,7 @@ import { Auth } from '../components/Auth';
 import {
   LoadableTop,
   LoadableLogin,
+  LoadableSignup,
   LoadableHome,
   LoadableCounter,
   LoadableTodo,
@@ -15,6 +16,7 @@ export const Router = () => (
     <Switch>
       <Route exact path="/" component={LoadableTop} />
       <Route path="/login" component={LoadableLogin} />
+      <Route path="/signup" component={LoadableSignup} />
       <Auth>
         <Route path="/home" component={LoadableHome} />
         <Route path="/counter" component={LoadableCounter} />

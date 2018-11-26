@@ -12,6 +12,12 @@ export const LoadableLogin = loadable(() =>
   ),
 );
 
+export const LoadableSignup = loadable(() =>
+  import(/* webpackChunkName: "Signup" */ '../containers/Signup').then(
+    ({ Signup }) => Signup,
+  ),
+);
+
 export const LoadableHome = loadable(() =>
   import(/* webpackChunkName: "Home" */ '../components/pages/Home').then(
     ({ Home }) => Home,
