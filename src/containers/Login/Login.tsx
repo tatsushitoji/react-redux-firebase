@@ -3,7 +3,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { compose } from 'recompose';
 import { RootState } from '../../stores/store';
 import { RootActions } from '../../stores/actions';
-import { logIn, signUp, ILogin, ISignup } from '../../modules/auth';
+import { logIn, ILogin } from '../../modules/auth';
 import { head } from '../../hocs/head';
 import { LoginComponent, Props } from '../../components/pages/Login';
 import { withFirebase } from 'react-redux-firebase';
@@ -16,7 +16,6 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<RootState, undefined, RootActions>,
 ) => ({
   login: (payload: ILogin) => dispatch(logIn(payload)),
-  signup: (payload: ISignup) => dispatch(signUp(payload)),
 });
 export const Login = compose<Props, { store?: unknown }>(
   head('Login'),
