@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { compose } from 'recompose';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { PaperContainer } from '../../atoms';
+import { head } from '../../../hocs/head';
 
-export const Home: React.SFC = () => (
+const HomeComponent: React.SFC = () => (
   <PaperContainer>
     <Typography component="h3" variant="h3">
       Home
@@ -15,3 +17,5 @@ export const Home: React.SFC = () => (
     </Typography>
   </PaperContainer>
 );
+
+export const Home = compose(head('Home'))(HomeComponent);
