@@ -42,7 +42,6 @@ export const logOut: ActionCreator<FBAction<void>> = () => (
   { getFirebase },
 ) => {
   const firebase = getFirebase();
-  console.log('looooooooog out');
   firebase.logout().catch((err: Error) => {
     console.log(err);
   });
