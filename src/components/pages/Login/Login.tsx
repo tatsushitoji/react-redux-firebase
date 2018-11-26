@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { withFormik, InjectedFormikProps } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { PaperContainer } from '../../atoms/PaperContainer';
 // import { AuthForm } from '../../organisms/AuthForm';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { ILogin } from '../../../modules/auth';
+import { Auth, ILogin } from '../../../modules/auth';
 
 interface FormProps {
   login: Props['login'];
@@ -82,11 +82,15 @@ const LoginForm = withFormik<FormProps, FormValues>({
 })(AuthForm);
 
 export interface Props {
+  auth: Auth;
   login: (payload: ILogin) => void;
 }
 
-export const LoginComponent: React.SFC<Props> = ({ login }) => (
-  <PaperContainer>
-    <LoginForm login={login} />
-  </PaperContainer>
-);
+export const LoginComponent: React.SFC<Props> = ({ auth, login }) => {
+  if (auth.isLoaded && !auth.isEmpty) return <Redirect to="/home" />; // TODO: workaround Redirect
+  return (
+    <PaperContainer>
+      <LoginForm login={login} />
+    </PaperContainer>
+  );
+};

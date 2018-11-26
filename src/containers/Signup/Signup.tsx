@@ -9,7 +9,7 @@ import { SignupComponent, Props } from '../../components/pages/Signup';
 import { withFirebase } from 'react-redux-firebase';
 
 const mapStateToProps = (state: RootState) => ({
-  firebase: state.firebase,
+  auth: state.firebase.auth,
 });
 
 const mapDispatchToProps = (

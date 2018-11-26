@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { withFormik, InjectedFormikProps } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { PaperContainer } from '../../atoms/PaperContainer';
 // import { AuthForm } from '../../organisms/AuthForm';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { ISignup } from '../../../modules/auth';
+import { Auth, ISignup } from '../../../modules/auth';
 
 interface FormProps {
   signup: Props['signup'];
@@ -99,11 +99,15 @@ const SignupForm = withFormik<FormProps, FormValues>({
 })(AuthForm);
 
 export interface Props {
+  auth: Auth;
   signup: (payload: ISignup) => void;
 }
 
-export const SignupComponent: React.SFC<Props> = ({ signup }) => (
-  <PaperContainer>
-    <SignupForm signup={signup} />
-  </PaperContainer>
-);
+export const SignupComponent: React.SFC<Props> = ({ auth, signup }) => {
+  if (auth.isLoaded && !auth.isEmpty) return <Redirect to="/home" />; // TODO: workaround Redirect
+  return (
+    <PaperContainer>
+      <SignupForm signup={signup} />
+    </PaperContainer>
+  );
+};
