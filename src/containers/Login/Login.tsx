@@ -1,12 +1,16 @@
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { compose } from 'recompose';
-import { RootState } from '../../stores/store';
-import { RootActions } from '../../stores/actions';
-import { logIn, ILogin } from '../../modules/auth';
-import { head } from '../../hocs/head';
-import { LoginComponent, Props } from '../../components/pages/Login';
+import { compose, mapProps } from 'recompose';
 import { withFirebase } from 'react-redux-firebase';
+import { RootState, history } from '../../stores/store';
+import { RootActions } from '../../stores/actions';
+import { logIn, ILogin, Auth } from '../../modules/auth';
+import { head } from '../../hocs/head';
+import { getDerivedStateFromProps } from '../../hocs/getDerivedStateFromProps';
+import {
+  LoginComponent,
+  Props as LoginProps,
+} from '../../components/pages/Login';
 
 const mapStateToProps = (state: RootState) => ({
   auth: state.firebase.auth,
@@ -17,11 +21,25 @@ const mapDispatchToProps = (
 ) => ({
   login: (payload: ILogin) => dispatch(logIn(payload)),
 });
-export const Login = compose<Props, { store?: unknown }>(
+
+interface Props extends LoginProps {
+  auth: Auth;
+}
+
+export const Login = compose<LoginProps, { store?: unknown }>(
   head('Login'),
   withFirebase,
   connect(
     mapStateToProps,
     mapDispatchToProps,
   ),
+  getDerivedStateFromProps<Props>((nextProps, _) => {
+    if (nextProps.auth.isLoaded && !nextProps.auth.isEmpty) {
+      history.push('/home');
+    }
+    return nextProps;
+  }),
+  mapProps<LoginProps, Props>(({ login }) => ({
+    login,
+  })),
 )(LoginComponent);
