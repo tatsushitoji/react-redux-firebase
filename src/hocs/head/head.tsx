@@ -6,7 +6,7 @@ export interface Props {
 }
 
 export const head = <P extends Props>(title: string) => (
-  Component: React.ComponentClass<P> | React.SFC<P>,
+  Component: React.ComponentType<P>,
 ): React.SFC<P> => props => (
   <>
     <Helmet>
