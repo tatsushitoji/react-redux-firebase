@@ -1,11 +1,11 @@
-import { Actions } from '.';
+import { LOADINGSTART, LOADINGFINISH, LOADINGRESET, Actions } from '.';
 
 export interface State {
-  count: number;
+  isLoading: number;
 }
 
 const initialState: State = {
-  count: 0,
+  isLoading: 0,
 };
 
 export const reducer = (
@@ -13,6 +13,12 @@ export const reducer = (
   action: Actions,
 ): State => {
   switch (action.type) {
+    case LOADINGSTART:
+      return { ...state, isLoading: state.isLoading + 1 };
+    case LOADINGFINISH:
+      return { ...state, isLoading: state.isLoading - 1 };
+    case LOADINGRESET:
+      return initialState;
     default:
       return state;
   }
