@@ -4,7 +4,7 @@ import { compose, mapProps } from 'recompose';
 import { withFirebase } from 'react-redux-firebase';
 import { RootState, history } from '../../stores/store';
 import { RootActions } from '../../stores/actions';
-import { logIn, ILogin, Auth } from '../../modules/auth';
+import { logIn, LoginPayload, Auth } from '../../modules/auth';
 import { head } from '../../hocs/head';
 import { getDerivedStateFromProps } from '../../hocs/getDerivedStateFromProps';
 import {
@@ -19,7 +19,7 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<RootState, undefined, RootActions>,
 ) => ({
-  login: (payload: ILogin) => dispatch(logIn(payload)),
+  login: (payload: LoginPayload) => dispatch(logIn(payload)),
 });
 
 interface Props extends LoginProps {

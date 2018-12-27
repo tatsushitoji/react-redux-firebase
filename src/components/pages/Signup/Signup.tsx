@@ -5,7 +5,7 @@ import { PaperContainer } from '../../atoms/PaperContainer';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { ISignup } from '../../../modules/auth';
+import { SignupPayload } from '../../../modules/auth';
 
 interface FormProps {
   signup: Props['signup'];
@@ -98,7 +98,7 @@ const SignupForm = withFormik<FormProps, FormValues>({
 })(AuthForm);
 
 export interface Props {
-  signup: (payload: ISignup) => void;
+  signup: (payload: SignupPayload) => void;
 }
 
 export const SignupComponent: React.SFC<Props> = ({ signup }) => (

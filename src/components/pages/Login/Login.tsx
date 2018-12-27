@@ -5,7 +5,7 @@ import { PaperContainer } from '../../atoms/PaperContainer';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { ILogin } from '../../../modules/auth';
+import { LoginPayload } from '../../../modules/auth';
 
 interface FormProps {
   login: Props['login'];
@@ -81,7 +81,7 @@ const LoginForm = withFormik<FormProps, FormValues>({
 })(AuthForm);
 
 export interface Props {
-  login: (payload: ILogin) => void;
+  login: (payload: LoginPayload) => void;
 }
 
 export const LoginComponent: React.SFC<Props> = ({ login }) => (

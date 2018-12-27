@@ -1,4 +1,5 @@
 import { ActionCreator } from 'redux';
+import { SignupPayload, LoginPayload } from './types';
 import { FirebaseAction } from '../shared/types';
 
 export const LOADINGSTART = 'auth/loading_start';
@@ -21,20 +22,11 @@ export type Actions = ReturnType<
   typeof authLoadingStart | typeof authLoadingFinish | typeof authLoadingReset
 >;
 
-export interface BaseAuth {
-  email: string;
-  password: string;
-}
-
-export interface ISignup extends BaseAuth {
-  username: string;
-}
-
 export const signUp: ActionCreator<FirebaseAction<void>> = ({
   email,
   password,
   username,
-}: ISignup) => (_, __, { getFirebase }) => {
+}: SignupPayload) => (_, __, { getFirebase }) => {
   const firebase = getFirebase();
   firebase
     .createUser({ email, password }, { username, email })
@@ -43,13 +35,9 @@ export const signUp: ActionCreator<FirebaseAction<void>> = ({
     });
 };
 
-export interface ILogin extends BaseAuth {}
-
-export const logIn: ActionCreator<FirebaseAction<void>> = (payload: ILogin) => (
-  dispatch,
-  __,
-  { getFirebase },
-) => {
+export const logIn: ActionCreator<FirebaseAction<void>> = (
+  payload: LoginPayload,
+) => (dispatch, __, { getFirebase }) => {
   dispatch(authLoadingStart());
   const firebase = getFirebase();
   firebase

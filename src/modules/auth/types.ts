@@ -9,3 +9,14 @@ export interface Auth {
   isLoaded?: boolean;
   isEmpty?: boolean;
 }
+
+interface BaseAuthPayload {
+  email: string;
+  password: string;
+}
+
+export interface SignupPayload extends BaseAuthPayload {
+  username: string;
+}
+
+export interface LoginPayload extends BaseAuthPayload {}
