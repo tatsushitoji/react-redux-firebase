@@ -68,7 +68,7 @@ const HeaderComponent: React.SFC<HeaderProps & HeaderState> = ({
           color="inherit"
           aria-label="Open drawer"
           onClick={toggleSideOpen}
-          className={classNames(classes.menuButton)}
+          className={classes.menuButton}
         >
           <MenuIcon />
         </IconButton>
