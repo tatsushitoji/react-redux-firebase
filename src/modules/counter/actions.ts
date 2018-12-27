@@ -1,5 +1,5 @@
 import { ActionCreator } from 'redux';
-import { FBAction } from '../../types';
+import { FirebaseAction } from '../shared/types';
 
 export const LOADINGSTART = 'counter/loading_start';
 export const LOADINGFINISH = 'counter/loading_finish';
@@ -17,7 +17,7 @@ export const counterLoadingReset = () => ({
   type: LOADINGRESET as typeof LOADINGRESET,
 });
 
-export const incrementAmount: ActionCreator<FBAction<void>> = (
+export const incrementAmount: ActionCreator<FirebaseAction<void>> = (
   amount: number,
 ) => (dispatch, getState, { getFirestore }) => {
   dispatch(counterLoadingStart());
@@ -38,7 +38,7 @@ export const incrementAmount: ActionCreator<FBAction<void>> = (
     });
 };
 
-export const decrementAmount: ActionCreator<FBAction<void>> = (
+export const decrementAmount: ActionCreator<FirebaseAction<void>> = (
   amount: number,
 ) => (dispatch, getState, { getFirestore }) => {
   dispatch(counterLoadingStart());

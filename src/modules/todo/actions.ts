@@ -1,5 +1,5 @@
 import { ActionCreator } from 'redux';
-import { FBAction } from '../../types';
+import { FirebaseAction } from '../shared/types';
 
 export const LOADINGSTART = 'todo/loading_start';
 export const LOADINGFINISH = 'todo/loading_finish';
@@ -21,7 +21,7 @@ export type Actions = ReturnType<
   typeof todoLoadingStart | typeof todoLoadingFinish | typeof todoLoadingReset
 >;
 
-export const addTodo: ActionCreator<FBAction<void>> = (text: string) => (
+export const addTodo: ActionCreator<FirebaseAction<void>> = (text: string) => (
   dispatch,
   __,
   { getFirestore },
@@ -42,7 +42,7 @@ export const addTodo: ActionCreator<FBAction<void>> = (text: string) => (
     });
 };
 
-export const toggleTodo: ActionCreator<FBAction<void>> = (id: string) => (
+export const toggleTodo: ActionCreator<FirebaseAction<void>> = (id: string) => (
   dispatch,
   getState,
   { getFirestore },
