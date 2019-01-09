@@ -99,10 +99,17 @@ const SignupForm = withFormik<FormProps, FormValues>({
 
 export interface Props {
   signup: (payload: SignupPayload) => void;
+  anonymousSignIn: any;
 }
 
-export const SignupComponent: React.SFC<Props> = ({ signup }) => (
-  <PaperContainer>
-    <SignupForm signup={signup} />
-  </PaperContainer>
-);
+export const SignupComponent: React.SFC<Props> = ({
+  signup,
+  anonymousSignIn,
+}) => {
+  return (
+    <PaperContainer>
+      <SignupForm signup={signup} />
+      <Button onClick={anonymousSignIn}>アノニマス</Button>
+    </PaperContainer>
+  );
+};

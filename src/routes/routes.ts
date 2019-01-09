@@ -19,7 +19,7 @@ export const LoadableSignup = loadable(() =>
 );
 
 export const LoadableHome = loadable(() =>
-  import(/* webpackChunkName: "Home" */ '../components/pages/Home').then(
+  import(/* webpackChunkName: "Home" */ '../containers/Home').then(
     ({ Home }) => Home,
   ),
 );

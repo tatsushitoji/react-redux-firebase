@@ -1,11 +1,17 @@
 import * as React from 'react';
-import { compose } from 'recompose';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { PaperContainer } from '../../atoms';
-import { head } from '../../../hocs/head';
+import { LoginPayload } from '../../../modules/auth';
+import { Button } from '@material-ui/core';
 
-const HomeComponent: React.SFC = () => (
+export interface Props {
+  normalizeAnonymousUser: (
+    payload: LoginPayload,
+  ) => (_: React.SyntheticEvent) => void;
+}
+
+export const HomeComponent: React.SFC<Props> = ({ normalizeAnonymousUser }) => (
   <PaperContainer>
     <Typography component="h3" variant="h3">
       Home
@@ -15,7 +21,13 @@ const HomeComponent: React.SFC = () => (
       This App contains <Link to="/counter">Counter</Link> and{' '}
       <Link to="/todo">Todo</Link>
     </Typography>
+    <Button
+      onClick={normalizeAnonymousUser({
+        email: 'normalize@example.com',
+        password: 'normalizenormalize',
+      })}
+    >
+      ノーマライズ
+    </Button>
   </PaperContainer>
 );
-
-export const Home = compose(head('Home'))(HomeComponent);

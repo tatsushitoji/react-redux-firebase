@@ -4,7 +4,12 @@ import { compose, mapProps } from 'recompose';
 import { withFirebase } from 'react-redux-firebase';
 import { RootState, history } from '../../stores/store';
 import { RootActions } from '../../stores/actions';
-import { signUp, SignupPayload, Auth } from '../../modules/auth';
+import {
+  signUp,
+  anonymousSignIn,
+  SignupPayload,
+  Auth,
+} from '../../modules/auth';
 import { head } from '../../hocs/head';
 import { getDerivedStateFromProps } from '../../hocs/getDerivedStateFromProps';
 import {
@@ -14,11 +19,13 @@ import {
 
 const mapStateToProps = (state: RootState) => ({
   auth: state.firebase.auth,
+  firebase: state.firebase,
 });
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<RootState, undefined, RootActions>,
 ) => ({
+  anonymousSignIn: () => dispatch(anonymousSignIn()),
   signup: (payload: SignupPayload) => dispatch(signUp(payload)),
 });
 
@@ -39,7 +46,8 @@ export const Signup = compose<SignupProps, { store?: unknown }>(
     }
     return nextProps;
   }),
-  mapProps<SignupProps, Props>(({ signup }) => ({
+  mapProps<SignupProps, Props>(({ signup, anonymousSignIn }) => ({
     signup,
+    anonymousSignIn,
   })),
 )(SignupComponent);
